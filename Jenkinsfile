@@ -18,11 +18,14 @@ pipeline {
             steps {
                 script {
                     // Uses the scanner tool we installed
-                    def scannerHome = tool 'SonarScanner' 
+                    def scannerHome = tool 'Sonar-scanner' 
                     withSonarQubeEnv('sonar-server') {
-                        sh "${scannerHome}/bin/sonar-scanner \
-                        -Dsonar.projectKey=devops-project \
-                        -Dsonar.sources=."
+                        sh """
+                ${scannerHome}/bin/sonar-scanner \
+                -Dsonar.projectKey=sample-app \
+                -Dsonar.projectName=sample-app \
+                -Dsonar.sources=.
+                """
                     }
                 }
             }
